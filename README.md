@@ -6,4 +6,5 @@ Scrips to convert Android strings.xml to IOS Localizable.xcstrings
 - compare_keys.js - Compare IOS Localizable.xcstrings with Android strings.xml, finds the keys missing in the Android file.
 
 The scripts require Node.js installed, and a ./data folder for the source and result files.
+
 To run: node <script_name>
