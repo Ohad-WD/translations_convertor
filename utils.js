@@ -1,8 +1,12 @@
+
+import { readFileSync } from 'fs';
+import { parseString } from 'xml2js';
+
 /**
  * Parses XML file and extracts 2 Objects, for strings and plurals
  * @returns Array with the objects [stringsObj, pluralsObj]
  */
-function xmlToObjects(filename) {
+export function xmlToObjects(filename) {
 
     const xmlStr = readFileSync(filename)
         .toString()
@@ -56,7 +60,7 @@ function xmlToObjects(filename) {
 /**
  * Converts format specifiers from Android to IOS,
  */
-function convertFormatSpecifiers(input) {
+export function convertFormatSpecifiers(input) {
     return input ?? ""
         // Replace string specifiers (e.g., %s, %1$s) → %@
         .replace(/%\d*\$?s/g, "%@")
@@ -77,7 +81,7 @@ function convertFormatSpecifiers(input) {
 /**
  * Strips format specifiers from string imported from Android if the IOS original has none,
  */
-function compareAndStripSpecifiers(origStr, importStr) {
+export function compareAndStripSpecifiers(origStr, importStr) {
     // Regex for Apple-style format specifiers
     const specifierRegex = /%[@df]|%l{1,2}d|%lu/g;
 

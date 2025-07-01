@@ -7,6 +7,7 @@
 // Save the result as ./data/missingKeys.json
 
 import { readFileSync, writeFile } from "fs"
+import { xmlToObjects } from "./utils.js"
 
 //parse IOS file
 const jsonStr = readFileSync("./data/Localizable.xcstrings")

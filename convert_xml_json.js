@@ -7,6 +7,7 @@
 // Save the result as ./data/result.json - to be renamed as the new Localizable.xcstrings
 
 import { writeFile } from "fs"
+import { xmlToObjects, convertFormatSpecifiers } from "./utils.js"
 
 const resultObj = {
     "sourceLanguage": "en",
