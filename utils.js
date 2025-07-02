@@ -60,8 +60,10 @@ export function xmlToObjects(filename) {
 /**
  * Converts format specifiers from Android to IOS,
  */
-export function convertFormatSpecifiers(input) {
-    return input ?? ""
+export function convertFormatSpecifiers(input, forceInt = false) {
+
+    console.log(input)
+    var result = (input ?? "")
         // Replace string specifiers (e.g., %s, %1$s) → %@
         .replace(/%\d*\$?s/g, "%@")
         // Replace integer specifiers (e.g., %d, %1$d) → %d
@@ -76,6 +78,12 @@ export function convertFormatSpecifiers(input) {
         .replace(/%\d*\$?ld/g, "%ld")
         // Replace \\\\n with \\n
         .replace(/\\\\n/g, '\\n');
+
+    if (forceInt) {
+        result = result.replace(/%@/g, "%d")
+    }
+
+    return result;
 }
 
 /**

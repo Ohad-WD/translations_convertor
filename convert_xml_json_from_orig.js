@@ -66,6 +66,8 @@ Object.keys(pluralsDeObj).forEach(key => {
     if (value) {
 
         const existingEnValue = resultObj["strings"][key]
+        const oneEnValue = existingEnValue ?? convertFormatSpecifiers(pluralsEnObj[key]["one"], true);
+        const otherEnValue = existingEnValue ?? convertFormatSpecifiers(pluralsEnObj[key]["other"], true);
         if (!existingEnValue) {
             //if key doesn't exist in ios file - create it with english
             resultObj["strings"][key] = {
@@ -76,17 +78,13 @@ Object.keys(pluralsDeObj).forEach(key => {
                                 "one": {
                                     "stringUnit": {
                                         "state": "needs_review",
-                                        "value": compareAndStripSpecifiers(existingEnValue,
-                                            convertFormatSpecifiers(pluralsEnObj[key]["one"])
-                                        ),
+                                        "value": oneEnValue,
                                     }
                                 },
                                 "other": {
                                     "stringUnit": {
                                         "state": "translated",
-                                        "value": compareAndStripSpecifiers(existingEnValue,
-                                            convertFormatSpecifiers(pluralsEnObj[key]["other"])
-                                        ),
+                                        "value": otherEnValue,
                                     }
                                 }
                             }
@@ -103,13 +101,15 @@ Object.keys(pluralsDeObj).forEach(key => {
                     "one": {
                         "stringUnit": {
                             "state": "needs_review",
-                            "value": convertFormatSpecifiers(value["one"]),
+                            "value": compareAndStripSpecifiers(oneEnValue,
+                                convertFormatSpecifiers(value["one"], true)),
                         }
                     },
                     "other": {
                         "stringUnit": {
                             "state": "translated",
-                            "value": convertFormatSpecifiers(value["other"])
+                            "value": compareAndStripSpecifiers(otherEnValue,
+                                convertFormatSpecifiers(value["other"], true))
                         }
                     }
                 }
